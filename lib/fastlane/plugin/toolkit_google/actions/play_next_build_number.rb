@@ -32,8 +32,8 @@ module Fastlane
 						options[:track] = t
 						version_codes += other_action.google_play_track_version_codes(options)
 					end
-				rescue StandardError => error
-					UI.error(error)
+				rescue StandardError => e
+					UI.error(e)
 				end
 
 				lane_context[SharedValues::PLAY_NEXT_BUILD_NUMBER_ALL] = version_codes

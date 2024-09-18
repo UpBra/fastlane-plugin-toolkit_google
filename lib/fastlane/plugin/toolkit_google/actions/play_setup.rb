@@ -17,7 +17,7 @@ module Fastlane
 				file = files.first
 
 				unless file
-					UI.important "No files found. Skipping..."
+					UI.important("No files found. Skipping...")
 					return
 				end
 

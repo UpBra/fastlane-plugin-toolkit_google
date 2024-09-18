@@ -22,7 +22,7 @@ module Fastlane
 
 				other_action.supply(options)
 
-				name = ENV['SUPPLY_SETUP_NAME']
+				name = ENV.fetch('SUPPLY_SETUP_NAME')
 				name ||= params[:package_name]
 				version_name = params[:version_name]
 				version_code = params[:version_code]
