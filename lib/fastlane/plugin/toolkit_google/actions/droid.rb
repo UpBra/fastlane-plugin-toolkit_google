@@ -5,9 +5,13 @@
 #
 # -------------------------------------------------------------------------
 
+require 'fastlane/actions/gradle'
+
 module Fastlane
 
 	module Actions
+
+		GradleAction = Fastlane::Actions::GradleAction unless Fastlane::Actions.const_defined?(:GradleAction)
 
 		class DroidAction < GradleAction
 

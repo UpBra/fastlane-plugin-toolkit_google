@@ -1,3 +1,12 @@
+# -------------------------------------------------------------------------
+#
+# play_deploy
+# Alias for the `supply` action with extras
+#
+# -------------------------------------------------------------------------
+
+require 'fastlane/actions/supply'
+
 module Fastlane
 
 	module Actions

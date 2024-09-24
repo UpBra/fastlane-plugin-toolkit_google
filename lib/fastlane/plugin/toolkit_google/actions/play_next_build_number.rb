@@ -1,3 +1,12 @@
+# -------------------------------------------------------------------------
+#
+# play_next_build_number
+# Alias for the `google_play_track_version_codes` action with extras
+#
+# -------------------------------------------------------------------------
+
+require 'fastlane/actions/google_play_track_version_codes'
+
 module Fastlane
 
 	module Actions
