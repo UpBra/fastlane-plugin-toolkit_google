@@ -1,3 +1,12 @@
+# -------------------------------------------------------------------------
+#
+# play_next_build_number
+# Alias for the `google_play_track_version_codes` action with extras
+#
+# -------------------------------------------------------------------------
+
+require 'fastlane/actions/google_play_track_version_codes'
+
 module Fastlane
 
 	module Actions
@@ -7,7 +16,7 @@ module Fastlane
 			PLAY_NEXT_BUILD_NUMBER_ALL = :PLAY_NEXT_BUILD_NUMBER_ALL
 		end
 
-		class PlayNextBuildNumberAction < Action
+		class PlayNextBuildNumberAction < GooglePlayTrackVersionCodesAction
 
 			def self.run(params)
 				FastlaneCore::PrintTable.print_values(
@@ -16,21 +25,16 @@ module Fastlane
 					mask_keys: [:json_key]
 				)
 
-				available = Fastlane::Actions::GooglePlayTrackVersionCodesAction.available_options.map(&:key)
-				options = params.values.clone.keep_if { |k,v| available.include?(k) }
-				options.transform_keys(&:to_sym)
-
-				tracks = []
+				tracks = ['internal']
 				tracks << params[:track] if params[:track]
-				tracks << 'internal' unless tracks.include?('internal')
 				tracks << 'produciton' unless tracks.include?('production')
 
 				begin
 					version_codes = [0]
 
 					tracks.each do |t|
-						options[:track] = t
-						version_codes += other_action.google_play_track_version_codes(options)
+						params[:track] = t
+						version_codes += super(params)
 					end
 				rescue StandardError => e
 					UI.error(e)
@@ -48,10 +52,6 @@ module Fastlane
 
 			def self.description
 				'Returns the next build number by querying internal and production tracks and incrementing the highest by 1'
-			end
-
-			def self.available_options
-				Fastlane::Actions::GooglePlayTrackVersionCodesAction.available_options
 			end
 
 			def self.output
