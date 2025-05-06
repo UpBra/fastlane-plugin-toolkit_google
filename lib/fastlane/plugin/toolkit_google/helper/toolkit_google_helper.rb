@@ -17,14 +17,14 @@ module Fastlane
 				env_content = File.read(file_path)
 
 				# Update or add the key-value pair
-				if env_content.include?("#{key}")
+				if env_content.include?(key.to_s)
 					env_content.gsub!(/#{key}.*/, "#{key}=#{value}")
 				else
 					env_content << "\n#{key}=#{value}\n"
 				end
 
 				# Write the updated content back to the .env file
-				File.open(file_path, 'w') { |file| file.write(env_content) }
+				File.write(file_path, env_content)
 			end
 		end
 	end
